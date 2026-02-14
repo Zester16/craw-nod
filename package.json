@@ -4,6 +4,6 @@
     "playwright": "^1.58.2"
   },
   "scripts": {
-    "postinstall": "npx playwright install webkit"
+    "postinstall": "npx playwright install-deps && npx playwright install webkit"
   }
 }
