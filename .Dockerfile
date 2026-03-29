@@ -1,11 +1,11 @@
-FROM node:20-alpine AS production
+FROM node:20-alpine
 
 # Set the working directory in the container
 WORKDIR /app
 
 # Copy package files and install production dependencies
 COPY package*.json ./
-RUN npm install --only=production
+RUN npm install
 
 # Copy the rest of the application source code
 COPY . .
