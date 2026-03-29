@@ -1,3 +1,4 @@
+# Skipped using it as build time is more and crawling is taking more time
 FROM node:20-bookworm
 
 WORKDIR /app
