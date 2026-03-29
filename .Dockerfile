@@ -1,16 +1,14 @@
-FROM node:20-bookworm
+FROM mcr.microsoft.com/playwright:v1.42.0-jammy
 
 WORKDIR /app
 
-# Copy package files and install production dependencies first
+# Copy package files first to leverage Docker layer caching
 COPY package*.json ./
+
+# Install your dependencies
 RUN npm install
 
-# Install Playwright browsers and their OS dependencies
-# (--with-deps installs both the browsers and the OS level dependencies at once)
-RUN npx playwright install --with-deps
-
-# Copy the rest of your application source code
+# Copy the rest of the application
 COPY . .
 
 EXPOSE 3002
