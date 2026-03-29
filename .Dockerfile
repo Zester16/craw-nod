@@ -3,6 +3,13 @@ FROM node:20-alpine
 # Set the working directory in the container
 WORKDIR /app
 
+# This command installs generic system dependencies for all browsers
+RUN npx playwright install-deps
+
+# Install Playwright library and download browsers (Chromium, Firefox, WebKit)
+RUN npm install playwright
+RUN npx playwright install
+
 # Copy package files and install production dependencies
 COPY package*.json ./
 RUN npm install
