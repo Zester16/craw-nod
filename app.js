@@ -11,9 +11,12 @@ const port = process.env.PORT || 3002;
 const { webkit } = require('playwright');
 
 
+//#TODO: Modularize system by moving this function to services
+async function getBqPrimeTopOfMorningNewsletterV1() {
+	//old url kept for backup
+	//let url = "https://www.ndtvprofit.com/topic-load-more/from/allnews/type/news/page/1/query/All-You-Need-To-Know-Going-Into-Trade"
 
-async function getBqPrimeTopOfMorningNewsletter() {
-	let url = "https://www.ndtvprofit.com/topic-load-more/from/allnews/type/news/page/1/query/All-You-Need-To-Know-Going-Into-Trade"
+	let url = "https://www.ndtvprofit.com/search?searchtext=Stock-Market-Today:-All-You-Need-To-Know"
 	const browser = await webkit.launch();
 	const page = await browser.newPage();
 	await page.goto(url);
@@ -35,7 +38,7 @@ async function getBqPrimeTopOfMorningNewsletter() {
 
 app.get("/api/v1/bqprime-newsletter", async (req, rep) => {
 
-	const response = await getBqPrimeTopOfMorningNewsletter()
+	const response = await getBqPrimeTopOfMorningNewsletterV1()
 	rep.send(response)
 })
 
