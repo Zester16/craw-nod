@@ -38,9 +38,34 @@ async function getBqPrimeTopOfMorningNewsletterV1() {
 	return returnArray
 }
 
+//New function to get vq prime newsletter. Added on 07-07-2026
+async function getBqPrimeTopOfMorningNewsletterV2() {
+	//old url kept for backup. Not matching with previous urls
+
+	let url="https://www.ndtvprofit.com/search?searchtext=All%20you%20need%20to%20know%20going%20into%20trade"
+	const browser = await webkit.launch();
+	const page = await browser.newPage();
+	await page.goto(url);
+
+	const returnArray = []
+	//const headers = await page.headers()
+	//const links = await page.locator('a');
+	//Page locator changed className
+	divs = await page.locator('.SectionListingPage-module-scss-module__FuY8bW__articleTitle');
+	
+	for (let i = 0; i < await divs.count(); i++) {
+		const url = await divs.nth(i).getAttribute('href')
+		const title = await divs.nth(i).allTextContents()
+		returnArray.push({ url: url, title: title[0] })
+		console.log();
+		console.log("***")
+	}
+	await browser.close();
+	return returnArray
+}
 app.get("/api/v1/bqprime-newsletter", async (req, rep) => {
 
-	const response = await getBqPrimeTopOfMorningNewsletterV1()
+	const response = await getBqPrimeTopOfMorningNewsletterV2()
 	rep.send(response)
 })
 
