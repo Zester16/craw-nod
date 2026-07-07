@@ -15,8 +15,10 @@ const { webkit } = require('playwright');
 async function getBqPrimeTopOfMorningNewsletterV1() {
 	//old url kept for backup
 	//let url = "https://www.ndtvprofit.com/topic-load-more/from/allnews/type/news/page/1/query/All-You-Need-To-Know-Going-Into-Trade"
+	//second url for backup. As on 07-07-2026
+	//let url = "https://www.ndtvprofit.com/search?searchtext=Stock-Market-Today:-All-You-Need-To-Know"
 
-	let url = "https://www.ndtvprofit.com/search?searchtext=Stock-Market-Today:-All-You-Need-To-Know"
+	let url="https://www.ndtvprofit.com/search?searchtext=All%20you%20need%20to%20know%20going%20into%20trade"
 	const browser = await webkit.launch();
 	const page = await browser.newPage();
 	await page.goto(url);
